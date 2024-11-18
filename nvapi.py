@@ -6,7 +6,7 @@ import urllib.request
 # 오류 발생 추가 소스
 import ssl 
  
- def blog(keyword):
+def blog(keyword):
     ssl._create_default_https_context = ssl._create_unverified_context
 
     client_id = "네이버개발자센터에서 발급받은 키"
@@ -21,6 +21,13 @@ import ssl
     rescode = response.getcode()
     if(rescode==200):
         response_body = response.read()
-        print(response_body.decode('utf-8'))
+        # print(response_body.decode('utf-8'))
+        res = response_body.decode('utf-8')
+        print(type(res)) # 자료형(data type)을 확인
+        dic_res = json.loads(res) # json 문자열을 파이썬에 딕셔너리 자료형으로 변경
+        print(type(dic_res)) # 자료형(data type)을 확인
+        
+        print(dic_res['items'])
+
     else:
         print("Error Code:" + rescode)
